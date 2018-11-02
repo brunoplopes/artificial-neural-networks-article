@@ -42,60 +42,121 @@ Perceptron. Artificial Neural Network. Breast Cancer Wisconsin
 \section{Referencial Teórico}
 	%Problema, base conceitual para a solucao %
 	
-	Redes neurais artificiais (RNAs) são um modelos inspirados na arquitetura neural do cérebro e foi desenvolvido para tentar modelar a capacidade de aprendizagem de sistemas neurais biológicos \cite{b4}. Uma arquitetura típica de RNA conhecida como Perceptron de Multicamadas (MLP) contém uma série de camadas, compostas de neurônios e suas conexões. Um neurônio artificial tem a capacidade de calcular a soma ponderada de suas entradas e, em seguida, aplica uma função de ativação para obter um sinal que será transmitido para o próximo neurônio.
+	Nosso objetivo é utilizar a base de dados Breast Cancer Wisconsin \cite{b8} fornecida pelo Hospital Universidade de Wisconsin para treinar uma Rede Neural Artificial(RNA). Esses elementos serão utilizados pela nossa RNA, afim aprender a classificar quais tipos de tumores são malignos e quais são benignos. 
 	
+	Redes neurais artificiais são modelos inspirados na arquitetura neural do cérebro e foi desenvolvido para tentar modelar a capacidade de aprendizagem de sistemas neurais biológicos \cite{b4}. Uma arquitetura típica de RNA conhecida como Perceptron de Multicamadas (MLP) contém uma série de camadas, compostas de neurônios e suas conexões. Um neurônio artificial tem a capacidade de calcular a soma ponderada de suas entradas e, em seguida, aplica uma função de ativação para obter um sinal que será transmitido para o próximo neurônio.
+	
+	\subsection{Perceptron Simples}
 	O Modelo Perceptron foi desenvolvido nas décadas de 1950 e 1960 pelo cientista Frank Rosenblatt \cite{b9}, inspirado em trabalhos anteriores de Warren McCulloch e Walter Pitts. Hoje, é mais comum usar outros modelos de neurônios artificiais, mas o Perceptron permite uma compreensão clara de como funciona uma rede neural em termos matemáticos.
 	
-	Um Perceptron é um modelo matemático que recebe várias entradas, x1, x2, … e produz uma única saída binária:
+	
+    Aprendizagem ou treinamento de RNA é equivalente a encontrar os valores de todos os pesos de tal forma que a saída desejada é gerada para correspondente entrada, pode ser visto como a minimização da função de erro computada pela diferença entre a saída da rede e o desejado na saída de um conjunto de observações de treinamento \cite{b6}.
+	
+	Um Perceptron é um modelo matemático que recebe várias entradas, x1, x2, … xn e produz uma única saída binária, forme monstra na Figura 1.
 	
 	\begin{figure}[htbp]
-	\centerline{\includegraphics[scale=0.4]{Perceptron.png}}
-	\caption{Fluxograma-Algoritmo PSO}
+	\centerline{\includegraphics[scale=1]{Perceptron.png}}
+	\caption{Perceptron simples}
 	\label{fig}
 	\end{figure}
 	
-	No exemplo mostrado, o Perceptron possui três entradas: x1, x2, x3. Rosenblatt propôs uma regra simples para calcular a saída. Ele introduziu pesos, w1, w2, …, números reais expressando a importância das respectivas entradas para a saída. A saída do neurônio, 0 ou 1, é determinada pela soma ponderada, Σjwjxj, menor ou maior do que algum valor limiar (threshold). Assim como os pesos, o threshold é um número real que é um parâmetro do neurônio. Para colocá-lo em termos algébricos mais precisos:
-
-Um Perceptron de multicamadas é uma variante do modelo Perceptron original proposto por Rosenblatt na década de 1950 \cite{b9}. Tem uma ou mais camadas escondidas entre suas camadas de entrada e saída, os neurônios são organizados em camadas, as conexões são sempre direcionadas de camadas inferiores para camadas, os neurônios na mesma camada não estão interligados.
-
-Aprendizagem ou treinamento de RNA é equivalente a encontrar os valores de todos os pesos de tal forma que a saída desejada é gerada para correspondente entrada, pode ser visto como a minimização da função de erro computada pela diferença entre a saída da rede e o desejado na saída de um conjunto de observações de treinamento \cite{b6}.
-
-Perceptron Multicamadas é o modelo muito utilizado em redes neurais artificiais que usando o back-propagation. A definição da arquitetura em redes MLP é um ponto muito relevante, a falta de conexões pode tornar a rede incapaz de resolver o problema de parâmetros ajustáveis, enquanto um excesso de conexões pode causar um ajuste excessivo dos dados de treinamento {b7}.
-
-
-
-Um conjunto de dados para classificação de padrões consiste em vários padrões
-juntamente com a sua classificação correta. Cada padrão consiste em um
-número de medições (isto é, valores numéricos).
-O objetivo consiste em gerar um classificador que tome as medidas
-de um padrão como entrada e fornece sua classificação correta como saída. UMA
-O tipo popular de classificador é o NN feed-forward [9].
-Um NN feed-forward consiste de uma camada de entrada de neurônios, um
-número de camadas ocultas e uma camada de saída. NNs feed-forward para
-Os propósitos de classificação de padrões consistem em tantos neurônios de
-padrões do conjunto de dados têm medições, ou seja, para cada medição
-existe exatamente um neurônio de entrada. A camada de saída consiste em
-muitos neurônios como o conjunto de dados tem classes. Dados os pesos de todos os
-conexões de neurônios, a fim de classificar um padrão, um fornece sua
-medições como entrada para os neurônios de entrada, propaga a saída
-sinais de camada a camada até que os sinais de saída dos neurônios de saída
-são obtidos. Cada neurônio de saída é identificado com um dos possíveis
-classes. O neurônio de saída que produz o sinal de saída mais alto
-classifica o respectivo padrão.
-
-
-
+	No exemplo mostrado, o Perceptron possui n entradas: x1, x2, … xn. Rosenblatt propôs uma regra simples para calcular a saída. Ele introduziu pesos, w1, w2, …, números reais expressando a importância das respectivas entradas para a saída. A saída do neurônio, 0 ou 1, é determinada pela soma ponderada, menor ou maior do que algum valor limiar (threshold). Assim como os pesos, o threshold é um número real que é um parâmetro do neurônio. Em termos algébricos temos:
 	
 	\begin{figure}[htbp]
-%	\centerline{\includegraphics[scale=0.4]{}}
-	\caption{Fluxograma-Algoritmo PSO}
+	\centerline{\includegraphics[scale=0.8]{Perceptron-threshold.png}}
+	\caption{Soma Ponderada com threshold}
 	\label{fig}
 	\end{figure}
+
+    O Perceptron é um classificador linear (binário). Além disso, é usado na aprendizagem supervisionada e pode ser usado para classificar os dados de entrada fornecidos.
+    
+    Um único Perceptron consegue resolver somente funções linearmente separáveis,  mas como nosso modelo de dados tem caracteristicas não linear, com podemos ver na Figura 3, o Perceptron não consegue gerar um hiperplano para separar os dados. Por isso buscamos uma variante do modelo de Perceptron simples, o Perceptron de multicamadas.
+    
+    \begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.3]{dados-cancer.png}}
+	\caption{Amostra dos dados (0 = benigno, 1 = maligno)}
+	\label{fig}
+	\end{figure}
+    
+    \subsection{Perceptron de multicamada}
+    Um Perceptron de multicamadas é uma variante do modelo Perceptron original proposto por Rosenblatt na década de 1950 \cite{b9}. Tem uma ou mais camadas escondidas entre suas camadas de entrada e saída, os neurônios são organizados em camadas, as conexões são sempre direcionadas de camadas inferiores para camadas, os neurônios na mesma camada não estão interligados, conforme ilustrado na Figura 4.
+    
+    \begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.9]{Perceptron-Multicamadas.png}}
+	\caption{Perceptron Multicamadas}
+	\label{fig}
+	\end{figure}
+    
+    A definição da arquitetura em redes MLP é um ponto muito relevante, a falta de conexões pode tornar a rede incapaz de resolver o problema de parâmetros ajustáveis, enquanto um excesso de conexões pode causar um ajuste excessivo dos dados de treinamento \cite{b7}.
+
+    \subsection{Base de Dados}
+
+O banco de dados utilizado nesse experimento foi obtido da Universidade de Wisconsin Hospitals \cite{b10} \cite{b11}. Os atributos 2 a 10 foram usados para representar instâncias. Cada instância tem uma das duas classes possíveis: benigna ou maligna.
+    
+    As amostras chegam periodicamente enquanto o Dr. Wolberg relata seus casos clínicos.
+   O banco de dados, portanto, reflete esse agrupamento cronológico dos dados.
+   Esta informação de agrupamento aparece imediatamente abaixo, tendo sido removida
+   dos dados em si:
+
+\begin{description}
+     \item Grupo 1: 367 instâncias (janeiro de 1989)
+     \item Grupo 2: 70 instâncias (outubro de 1989)
+     \item Grupo 3: 31 instâncias (fevereiro de 1990)
+     \item Grupo 4: 17 instâncias (abril de 1990)
+     \item Grupo 5: 48 instâncias (agosto de 1990)
+     \item Grupo 6: 49 instâncias (janeiro de 1991)
+     \item Grupo 7: 31 instâncias (junho de 1991)
+     \item Grupo 8: 86 instâncias (novembro de 1991)
+\end{description}
+    No total são 699 (a partir da base de dados doada em 15 de julho de 1992) \cite{b10} \cite{b11}. Observe que os resultados resumidos acima em uso, referem-se a um conjunto de dados
+    de tamanho 369, enquanto o Grupo 1 tem apenas 367 instâncias. Isso é porque originalmente continha 369 instâncias; 2 foram removidos. 
+   
+   Temos no total 10 atributos mais a classe, conforme abaixo:
+    \begin{enumerate}
+    
+   \item  Sample code number
+   \item  Clump Thickness
+   \item  Uniformity of Cell Size
+   \item  Uniformity of Cell Shape
+   \item  Marginal Adhesion
+   \item  Single Epithelial Cell Size
+   \item  Bare Nuclei
+   \item  Bland Chromatin
+   \item  Normal Nucleoli
+   \item  Mitoses
+   \item  Classe: (2 for benign, 4 for malignant)
+    \end{enumerate}
+    
+    Existem 16 registros com dados inválidos dentro do arquivo, eles foram retirados para que o resultado final não fosse prejudicado, pois os mesmos vieram com o sinal "?" no campo X1.3. Dessa forma temos a seguinte distribuição para treinamento: Benigno: 458 (65.5\%) Maligno: 241 (34.5\%)
+
 	
 	
 \section{Avaliação de Desenpenho}
     % Metodologia, experimentos e resultados, analise dos resultados(porques) %
-  
+    
+        \begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.4]{imagens/9,8,8,5,3-50.png}}
+	\caption{Função de Custo 50 iterações}
+	
+	\centerline{\includegraphics[scale=0.4]{imagens/9,8,8,5,3-1000.png}}
+	\caption{Função de Custo 1000 iterações}
+	\label{fig}
+	\end{figure}
+	
+	\begin{table}[]
+	\caption{Testes com limite de iterações}
+	\begin{center}
+    \begin{tabular}{l | c | r }
+    \hline
+         \# Iterações &Acurácia trenamento  & Acurácia teste \\\hline
+         50 &97.42647  &95.65217    \\\hline
+         100 &98.88268  &95.65217    \\\hline
+         1000 &99.44341  &96.37681    \\\hline
+         10000 &99.08088  &97.10145   \\\hline
+         20000 &99.26471  &97.10145  \\\hline
+    \end{tabular}
+    \end{center}
+    \end{table}
 \section{Resultado e Discussão}
 
    
@@ -123,7 +184,12 @@ classifica o respectivo padrão.
 \bibitem {b7} T.B Ludermir “Hybrid Optimization Algorithm for the Definition of MLP Neural Network Architectures and Weights” Proceedings of the Fifth International Conference on Hybrid Intelligent Systems (HIS’05) 0-7695- 2457-5/05 20.00 2005 IEEE.
 
 \bibitem{b9} Rosenblatt, “The Perceptron: A Theory of Statistical Separability in Cognitive Systems”, Cornell Aeronautical Laboratory, Report No. VG1196-G-1, January, 1958. 
-
+\bibitem{b10} O. L. Mangasarian and W. H. Wolberg: "Cancer          diagnosis via linear 
+      programming", SIAM News, Volume 23, Number 5, September 1990, pp 1 & 18.
+\bibitem{b11} William H. Wolberg and O.L. Mangasarian: "Multisurface method of 
+      pattern separation for medical diagnosis applied to breast cytology", 
+      Proceedings of the National Academy of Sciences, U.S.A., Volume 87, 
+      December 1990, pp 9193-9196.
 \end{thebibliography}
 \end{document}
 
