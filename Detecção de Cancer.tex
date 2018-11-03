@@ -39,10 +39,21 @@ Perceptron. Artificial Neural Network. Breast Cancer Wisconsin
 
 \section{INTRODUÇÃO}
 
+    Esse trabalho foi construído com o intuito de praticar, experimentalmente, a utilização das redes neurais artificiais em situações reais, utilizando conjunto de dados disponíveis em portais de dados abertos, dando soluções baseadas em reconhecimento de padrões.
+
+    Nosso trabalho iniciou-se com a escolha do conjunto de dados. Pela nossa familiaridade com o assunto referente a tumores e por entendermos que encontrar soluções que diminuam erros em diagnósticos médicos é importante, optamos por avaliar a utilização da tecnologia como facilitadora na apuração do diagnóstico do câncer de mama, através de dados extraídos de mamografias, a fim de encontrar padrões nos dados com o intuito de possibilitar a classificação dos resultados em maligno ou benigno.
+    
+    O conjunto de dados utilizado foi o Breast Cancer Wisconsin. Este conjunto de dados apresenta várias versões e optamos pela versão original. Sua dimensionalidade é 9, apresenta 699 registros, sendo que 16 deles apresentam erros e devem ser retirados do conjunto de dados para que isso não provoque erros no resultado.
+    
+    Nosso objetivo é estudar, experimentar e entender como funciona a rede neural perceptron, buscando aperfeiçoar nosso conhecimento referente a esta arquitetura e ao final do trabalho apresentamos a comparação dos resultados na utilização do perceptron com a técnica utilizada no artigo que usamos como base: An Evolutionary Artificial Neural Network Approach for Breast Cancer Diagnosis.
+    
+    Apresentamos, dentro desse contexto, um estudo baseado em: preparar o conjunto de dados para aplicação do perceptron, decidir pela utilização do perceptron simples ou de múltiplas camadas, normalizar os dados, separar os conjuntos de treinamento e testes, aplicar o modelo de perceptron adequado, validar os resultados.
+
+
 \section{Referencial Teórico}
 	%Problema, base conceitual para a solucao %
 	
-	Nosso objetivo é utilizar a base de dados Breast Cancer Wisconsin \cite{b8} fornecida pelo Hospital Universidade de Wisconsin para treinar uma Rede Neural Artificial(RNA). Esses elementos serão utilizados pela nossa RNA, afim aprender a classificar quais tipos de tumores são malignos e quais são benignos. 
+	Nosso objetivo é utilizar a base de dados Breast Cancer Wisconsin \cite{b8} fornecida pelo Hospital Universidade de Wisconsin para treinar nossa Rede Neural Artificial(RNA). Esses elementos serão utilizados pela nossa RNA, afim aprender a classificar quais tipos de tumores são malignos e quais são benignos. 
 	
 	Redes neurais artificiais são modelos inspirados na arquitetura neural do cérebro e foi desenvolvido para tentar modelar a capacidade de aprendizagem de sistemas neurais biológicos \cite{b4}. Uma arquitetura típica de RNA conhecida como Perceptron de Multicamadas (MLP) contém uma série de camadas, compostas de neurônios e suas conexões. Um neurônio artificial tem a capacidade de calcular a soma ponderada de suas entradas e, em seguida, aplica uma função de ativação para obter um sinal que será transmitido para o próximo neurônio.
 	
@@ -134,17 +145,62 @@ O banco de dados utilizado nesse experimento foi obtido da Universidade de Wisco
 \section{Avaliação de Desenpenho}
     % Metodologia, experimentos e resultados, analise dos resultados(porques) %
     
+    Em primeiro momento, pensamos em utilizar perceptron simples para tentar classificar nossa base de dados, mas 
+    dificilmente conseguimos encontrar no mundo real elementos cuja carateristica é não linear. O conjunto de dados utilizado em nossos expererimentos é de carater não linear, com isso tivemos que buscar outra euristica.
+    
+    Na busca por uma solução que te atendesse as nossas necessidades, encontramos o Perceptron de Multicamas. Esse modelo tem uma ou mais camadas escondidas de neuronios, conseguindo assim aprender sobre dados não lineares
+    
+    \subsection{Topologia da rede Perceptron Multicamadas}
+    
+    
+    A definição da arquitetura em redes MLP é um ponto muito relevante, 
+    com muitas conexões podemos ter um ajuste excessivo dos dados de treinamento, enquanto a falta de conexões pode fazer com que a rede não seja incapaz de resolver o problema de parametros ajustáveis \cite{b7}.
+
+    O design das camadas de entrada e saída da nossa rede é direto. Por exemplo, como estamos tentando ensinar nossa rede a classificar tumores malignos e benignos, uma maneira natural de projetar a rede é codificar o número de classes(9 classes existentes na base de dados) nos neurônios de entrada. A camada de saída conterá apenas um único neurônio com valores inferiores a 0,5 indicando que  o tumor é banigno e valores maiores que 0,5 indicando que o tumor é maligno.
+    
         \begin{figure}[htbp]
-	\centerline{\includegraphics[scale=0.4]{imagens/9,8,8,5,3-50.png}}
-	\caption{Função de Custo 50 iterações}
+	\centerline{\includegraphics[scale=0.4]{Perceptron-MLP.png}}
+	\caption{Topologia Perceptron Multicamadas}
 	
-	\centerline{\includegraphics[scale=0.4]{imagens/9,8,8,5,3-1000.png}}
-	\caption{Função de Custo 1000 iterações}
 	\label{fig}
 	\end{figure}
-	
-	\begin{table}[]
-	\caption{Testes com limite de iterações}
+    
+    A topologia apresentada na Figura 5 aprensentou os melhores resultados com o conjunto de dados de treinamento. Em particular, não é possível resumir o processo de design das camadas ocultas com poucas regras simples. 
+    
+    \subsection{Preparação dados para treinamento}
+    
+    Antes de realizar o treinamento sobre o conjunto de dados, precisamos remover alguns registros para que o resultado final não fosse prejudicado, pois alguns valores vieram sem dados. com isso ficamos com a seguinte distribuição: Maligno 241 e Benigno 458.
+    
+    Quando treinamos nosso modelo em um conjunto de dados (conjunto de dados de treinamento) e testamos o desempenho de nosso modelo em outro conjunto de dados (conjunto de dados de teste), a medida de desempenho usando o conjunto de dados de teste é conhecida como acuracia. 
+    
+    Para conseguir medir a acuracia da nossa rede precisamos dividir o conjunto de dados em treinamento e teste. O conjunto de treinamento contém os dados da mesma classe dos dados de treinamento, com exemplos rotulados em malignos e benignos. Este conjunto é para construir nosso modelo. O modelo aprende com os elementos de treinamento e é avaliado com os elementos do teste. Com isso podemos verificar se a nossa rede consegue generalizar e aprender.
+    
+    Para esse experimento dividimos nosso conjunto de dados de acordo com a seguinte regra: 80/20, ou seja, 80\% do conjunto de dados vai para o conjunto de treinamento e 20\% para o conjunto de testes. 
+    
+    Para que tivessemos um conjunto de teste homoneio, realizamos a seguinte operação:
+    
+    \begin{itemize}
+    
+    \item Passo 1: Carregamos todos todo conjunto de dados;
+    \item Passo 2: Pegamos os 10 primeiros registros
+    \item Passo 3: 2 primeiros itens para teste
+    \item Passo 4: Itens restantes para treinamento
+    \item Passo 5: Repetir passo 2 até que todos os registros sejam distribuidos
+    
+    \end{itemize}
+    
+    Com isso temos o seguinte cenario de distribuição: 544 registros para treinamento e 138 para teste. A separação de 10 em 10, de forma intercalada, é importante para temos uma distribuição mais uniforme das coletadas em momentos diferentes no treinamento e teste.
+    
+
+    \subsection{Treinamento e resultados}
+    
+    Depois de determinar o número ideal de camadas ocultas, neste caso 5, onde cada camada possui respectivamente 9, 8, 8, 5 e 3 neuronios artificiais como ilustrado na Figura 5.
+     
+    Podemos observar que os resultados de classificação obtidos dos dados de teste mostram foram bons, porque tivemos uma acurácia alto, mesmo para testes onde o número de ciclos foi pequeno. Como apresentado na Tabela 1.
+    
+    As Figuras 6 e 7 apresentam ilustram a retro-propagação do erro em uma da nossa MLP com diferentes limites de iterações.
+    \begin{table}[]
+	\caption{Resultado dos testes}
 	\begin{center}
     \begin{tabular}{l | c | r }
     \hline
@@ -157,13 +213,32 @@ O banco de dados utilizado nesse experimento foi obtido da Universidade de Wisco
     \end{tabular}
     \end{center}
     \end{table}
+    
+    Como trabalhamos com um número muito pequeno de exemplares, não tivemos problemas quanto ao número máximo de iterações. Os experimentos não foram executados em um computador com grande poder computacional, 
+
+    \begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.35]{imagens/9,8,8,5,3-50.png}}
+	\caption{Função de Custo 50 iterações}
+	
+	\centerline{\includegraphics[scale=0.35]{imagens/9,8,8,5,3-1000.png}}
+	\caption{Função de Custo 1000 iterações}
+	\label{fig}
+	\end{figure}
+	
 \section{Resultado e Discussão}
 
    
     
 \section*{Conclusão}
 
-  
+  No decorrer do trabalho podemos perceber que o assunto está sendo bastante abordado por muitos outros pesquisadores e isso nos dá uma satisfação muito grande, por perceber que tem muito estudo feito na área da medicina utilizando a aprendizagem de máquina, entendemos que esse assunto traz uma contribuição muito grande não só na eficiência para encontrar diagnósticos mais precisos mas também para prever ocorrências importantes como uma situação epidemiológica, por exemplo.
+
+    Com relação ao nosso trabalho, especificamente, podemos concluir que os experimentos foram satisfatórios, porém tivemos bastante trabalho para chegar ao resultado final, acreditamos que isso tenha ocorrido por sermos iniciantes nessa área e que a experiência nos ajudaria muito nas etapas do processo e essas foram as maiores dificuldades enfrentadas também.
+    
+    O assunto que precisamos aprender sozinhos foi como demonstrar graficamente se os dados que estamos utilizando são linearmente separáveis ou não para entendermos qual tipo de perceptron atenderia nosso experimento. Nosso conjunto de dados tem dimensionalidade 9 e nos deparamos com a dificuldade da plotagem utilizando os mesmos recursos que vinhamos desenvolvendo nos nossos trabalhos semanais, para isso, precisamos aprender a utilizar o PCA(Principal Component Analysis). Ao buscar informações sobre o assunto, deparamos com a quantidade infinita de materiais na área de inteligência artificial que podem nos auxiliar no desenvolvimento e entendimento de assuntos diversos nesse ramo.
+    
+    Referente à nossa opinião de potencialidade para publicar o trabalho, acreditamos que para que um trabalho seja publicável ele tem que trazer informações novas e resultados bastante relevantes, tais como: um conjunto de dados que foi criado pelos autores ou uma melhoria num algoritmo existente, criação de um algoritmo que melhore, sistematicamente, a aprendizagem cognitiva ou que seja novo no mercado e baseado nessas considerações, entendemos que o nosso trabalho não apresenta requisitos para publicação, pois foi baseado em soluções anteriores existentes.
+
 
 \begin{thebibliography}{00}
 
