@@ -13,7 +13,7 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Perceptron de Multiplas camadas para Diagnóstico de Câncer de Mama}
+\title{Perceptron de Múltiplas Camadas para Diagnóstico de Câncer de Mama}
 
 \author{\IEEEauthorblockN{1\textsuperscript{o} Anara Olimpio}
     \IEEEauthorblockA{
@@ -55,7 +55,7 @@ Perceptron. Artificial Neural Network. Breast Cancer Wisconsin
 	
 	Nosso objetivo é utilizar a base de dados Breast Cancer Wisconsin \cite{b8} fornecida pelo Hospital Universidade de Wisconsin para treinar nossa Rede Neural Artificial(RNA). Esses elementos serão utilizados pela nossa RNA, afim aprender a classificar quais tipos de tumores são malignos e quais são benignos. 
 	
-	Redes neurais artificiais são modelos inspirados na arquitetura neural do cérebro e foi desenvolvido para tentar modelar a capacidade de aprendizagem de sistemas neurais biológicos \cite{b4}. Uma arquitetura típica de RNA conhecida como Perceptron de Multicamadas (MLP) contém uma série de camadas, compostas de neurônios e suas conexões. Um neurônio artificial tem a capacidade de calcular a soma ponderada de suas entradas e, em seguida, aplica uma função de ativação para obter um sinal que será transmitido para o próximo neurônio.
+	Redes neurais artificiais são modelos inspirados na arquitetura neural do cérebro e foi desenvolvido para tentar modelar a capacidade de aprendizagem de sistemas neurais biológicos \cite{b4}. Uma arquitetura típica de RNA conhecida como Perceptron de Múltiplas Camadas (MLP) contém uma série de camadas, compostas de neurônios e suas conexões. Um neurônio artificial tem a capacidade de calcular a soma ponderada de suas entradas e, em seguida, aplica uma função de ativação para obter um sinal que será transmitido para o próximo neurônio.
 	
 	\subsection{Perceptron Simples}
 	O Modelo Perceptron foi desenvolvido nas décadas de 1950 e 1960 pelo cientista Frank Rosenblatt \cite{b9}, inspirado em trabalhos anteriores de Warren McCulloch e Walter Pitts. Hoje, é mais comum usar outros modelos de neurônios artificiais, mas o Perceptron permite uma compreensão clara de como funciona uma rede neural em termos matemáticos.
@@ -81,7 +81,7 @@ Perceptron. Artificial Neural Network. Breast Cancer Wisconsin
 
     O Perceptron é um classificador linear (binário). Além disso, é usado na aprendizagem supervisionada e pode ser usado para classificar os dados de entrada fornecidos.
     
-    Um único Perceptron consegue resolver somente funções linearmente separáveis,  mas como nosso modelo de dados tem caracteristicas não linear, com podemos ver na Figura 3, o Perceptron não consegue gerar um hiperplano para separar os dados. Por isso buscamos uma variante do modelo de Perceptron simples, o Perceptron de multicamadas.
+    Um único Perceptron consegue resolver somente funções linearmente separáveis,  mas como nosso modelo de dados tem características não linear, com podemos ver na Figura 3, o Perceptron não consegue gerar um hiperplano para separar os dados. Por isso buscamos uma variante do modelo de Perceptron simples, o Perceptron de Múltiplas Camadas.
     
     \begin{figure}[htbp]
 	\centerline{\includegraphics[scale=0.3]{dados-cancer.png}}
@@ -90,7 +90,7 @@ Perceptron. Artificial Neural Network. Breast Cancer Wisconsin
 	\end{figure}
     
     \subsection{Perceptron de multicamada}
-    Um Perceptron de multicamadas é uma variante do modelo Perceptron original proposto por Rosenblatt na década de 1950 \cite{b9}. Tem uma ou mais camadas escondidas entre suas camadas de entrada e saída, os neurônios são organizados em camadas, as conexões são sempre direcionadas de camadas inferiores para camadas, os neurônios na mesma camada não estão interligados, conforme ilustrado na Figura 4.
+    Um Perceptron de Múltiplas Camadas é uma variante do modelo Perceptron original proposto por Rosenblatt na década de 1950 \cite{b9}. Tem uma ou mais camadas escondidas entre suas camadas de entrada e saída, os neurônios são organizados em camadas, as conexões são sempre direcionadas de camadas inferiores para camadas, os neurônios na mesma camada não estão interligados, conforme ilustrado na Figura 4.
     
     \begin{figure}[htbp]
 	\centerline{\includegraphics[scale=0.9]{Perceptron-Multicamadas.png}}
@@ -142,42 +142,42 @@ O banco de dados utilizado nesse experimento foi obtido da Universidade de Wisco
 
 	
 	
-\section{Avaliação de Desenpenho}
+\section{Avaliação de Desempenho}
     % Metodologia, experimentos e resultados, analise dos resultados(porques) %
     
     Em primeiro momento, pensamos em utilizar perceptron simples para tentar classificar nossa base de dados, mas 
-    dificilmente conseguimos encontrar no mundo real elementos cuja carateristica é não linear. O conjunto de dados utilizado em nossos expererimentos é de carater não linear, com isso tivemos que buscar outra euristica.
+    dificilmente conseguimos encontrar no mundo real elementos cuja caraterística é não linear. O conjunto de dados utilizado em nossos experimentos é de caráter não linear, com isso tivemos que buscar outra heurística.
     
-    Na busca por uma solução que te atendesse as nossas necessidades, encontramos o Perceptron de Multicamas. Esse modelo tem uma ou mais camadas escondidas de neuronios, conseguindo assim aprender sobre dados não lineares
+    Na busca por uma solução que te atendesse as nossas necessidades, encontramos o Perceptron de Múltiplas Camadas. Esse modelo tem uma ou mais camadas escondidas de neurônios, conseguindo assim aprender sobre dados não lineares
     
     \subsection{Topologia da rede Perceptron Multicamadas}
     
     
     A definição da arquitetura em redes MLP é um ponto muito relevante, 
-    com muitas conexões podemos ter um ajuste excessivo dos dados de treinamento, enquanto a falta de conexões pode fazer com que a rede não seja incapaz de resolver o problema de parametros ajustáveis \cite{b7}.
+    com muitas conexões podemos ter um ajuste excessivo dos dados de treinamento, enquanto a falta de conexões pode fazer com que a rede não seja incapaz de resolver o problema de parâmetros ajustáveis \cite{b7}.
 
-    O design das camadas de entrada e saída da nossa rede é direto. Por exemplo, como estamos tentando ensinar nossa rede a classificar tumores malignos e benignos, uma maneira natural de projetar a rede é codificar o número de classes(9 classes existentes na base de dados) nos neurônios de entrada. A camada de saída conterá apenas um único neurônio com valores inferiores a 0,5 indicando que  o tumor é banigno e valores maiores que 0,5 indicando que o tumor é maligno.
+    O design das camadas de entrada e saída da nossa rede é direto. Por exemplo, como estamos tentando ensinar nossa rede a classificar tumores malignos e benignos, uma maneira natural de projetar a rede é codificar o número de classes(9 classes existentes na base de dados) nos neurônios de entrada. A camada de saída conterá apenas um único neurônio com valores inferiores a 0,5 indicando que  o tumor é benigno e valores maiores que 0,5 indicando que o tumor é maligno.
     
         \begin{figure}[htbp]
 	\centerline{\includegraphics[scale=0.4]{Perceptron-MLP.png}}
-	\caption{Topologia Perceptron Multicamadas}
+	\caption{Topologia Perceptron de Múltiplas Camadas}
 	
 	\label{fig}
 	\end{figure}
     
-    A topologia apresentada na Figura 5 aprensentou os melhores resultados com o conjunto de dados de treinamento. Em particular, não é possível resumir o processo de design das camadas ocultas com poucas regras simples. 
+    A topologia apresentada na Figura 5 apresentou os melhores resultados com o conjunto de dados de treinamento. Em particular, não é possível resumir o processo de design das camadas ocultas com poucas regras simples. 
     
     \subsection{Preparação dados para treinamento}
     
     Antes de realizar o treinamento sobre o conjunto de dados, precisamos remover alguns registros para que o resultado final não fosse prejudicado, pois alguns valores vieram sem dados. com isso ficamos com a seguinte distribuição: Maligno 241 e Benigno 458.
     
-    Quando treinamos nosso modelo em um conjunto de dados (conjunto de dados de treinamento) e testamos o desempenho de nosso modelo em outro conjunto de dados (conjunto de dados de teste), a medida de desempenho usando o conjunto de dados de teste é conhecida como acuracia. 
+    Quando treinamos nosso modelo em um conjunto de dados (conjunto de dados de treinamento) e testamos o desempenho de nosso modelo em outro conjunto de dados (conjunto de dados de teste), a medida de desempenho usando o conjunto de dados de teste é conhecida como acurácia. 
     
-    Para conseguir medir a acuracia da nossa rede precisamos dividir o conjunto de dados em treinamento e teste. O conjunto de treinamento contém os dados da mesma classe dos dados de treinamento, com exemplos rotulados em malignos e benignos. Este conjunto é para construir nosso modelo. O modelo aprende com os elementos de treinamento e é avaliado com os elementos do teste. Com isso podemos verificar se a nossa rede consegue generalizar e aprender.
+    Para conseguir medir a acurácia da nossa rede precisamos dividir o conjunto de dados em treinamento e teste. O conjunto de treinamento contém os dados da mesma classe dos dados de treinamento, com exemplos rotulados em malignos e benignos. Este conjunto é para construir nosso modelo. O modelo aprende com os elementos de treinamento e é avaliado com os elementos do teste. Com isso podemos verificar se a nossa rede consegue generalizar e aprender.
     
     Para esse experimento dividimos nosso conjunto de dados de acordo com a seguinte regra: 80/20, ou seja, 80\% do conjunto de dados vai para o conjunto de treinamento e 20\% para o conjunto de testes. 
     
-    Para que tivessemos um conjunto de teste homoneio, realizamos a seguinte operação:
+    Para que objeter um conjunto de teste homogêneo, realizamos a seguinte operação:
     
     \begin{itemize}
     
@@ -185,21 +185,18 @@ O banco de dados utilizado nesse experimento foi obtido da Universidade de Wisco
     \item Passo 2: Pegamos os 10 primeiros registros
     \item Passo 3: 2 primeiros itens para teste
     \item Passo 4: Itens restantes para treinamento
-    \item Passo 5: Repetir passo 2 até que todos os registros sejam distribuidos
+    \item Passo 5: Repetir passo 2 até que todos os registros sejam distribuídos
     
     \end{itemize}
     
-    Com isso temos o seguinte cenario de distribuição: 544 registros para treinamento e 138 para teste. A separação de 10 em 10, de forma intercalada, é importante para temos uma distribuição mais uniforme das coletadas em momentos diferentes no treinamento e teste.
+    Com isso temos o seguinte cenário de distribuição: 544 registros para treinamento e 138 para teste. A separação de 10 em 10, de forma intercalada, é importante para temos uma distribuição mais uniforme das coletadas em momentos diferentes no treinamento e teste.
     
 
     \subsection{Treinamento e resultados}
     
-    Depois de determinar o número ideal de camadas ocultas, neste caso 5, onde cada camada possui respectivamente 9, 8, 8, 5 e 3 neuronios artificiais como ilustrado na Figura 5.
+    Depois de determinar o número ideal de camadas ocultas, neste caso 5, onde cada camada possui respectivamente 9, 8, 8, 5 e 3 neurônios artificiais como ilustrado na Figura 5.
      
-    Podemos observar que os resultados de classificação obtidos dos dados de teste mostram foram bons, porque tivemos uma acurácia alto, mesmo para testes onde o número de ciclos foi pequeno. Como apresentado na Tabela 1.
-    
-    As Figuras 6 e 7 apresentam ilustram a retro-propagação do erro em uma da nossa MLP com diferentes limites de iterações.
-    \begin{table}[]
+         \begin{table}[]
 	\caption{Resultado dos testes}
 	\begin{center}
     \begin{tabular}{l | c | r }
@@ -213,9 +210,11 @@ O banco de dados utilizado nesse experimento foi obtido da Universidade de Wisco
     \end{tabular}
     \end{center}
     \end{table}
+     
+    Podemos observar que os resultados de classificação obtidos dos dados de teste mostram foram bons, porque tivemos uma acurácia alto, mesmo para testes onde o número de ciclos foi pequeno. Como apresentado na Tabela 1.
     
-    Como trabalhamos com um número muito pequeno de exemplares, não tivemos problemas quanto ao número máximo de iterações. Os experimentos não foram executados em um computador com grande poder computacional, 
-
+    As Figuras 6 e 7 ilustram a retropropagação do erro de dois experimentos.
+    
     \begin{figure}[htbp]
 	\centerline{\includegraphics[scale=0.35]{imagens/9,8,8,5,3-50.png}}
 	\caption{Função de Custo 50 iterações}
@@ -224,6 +223,9 @@ O banco de dados utilizado nesse experimento foi obtido da Universidade de Wisco
 	\caption{Função de Custo 1000 iterações}
 	\label{fig}
 	\end{figure}
+	
+	 O retropropagaçãoum é a técnica de rede neural mais utilizada no reconhecimento de padrões, consiste na utilização dos pesos, considerando a propagação do erro de saída da rede para a sua entrada. Este algoritmo também é conhecido como regra delta generalizada \cite{b12} \cite{b13}. 
+	
 	
 \section{Resultado e Discussão}
 
@@ -235,7 +237,7 @@ O banco de dados utilizado nesse experimento foi obtido da Universidade de Wisco
 
     Com relação ao nosso trabalho, especificamente, podemos concluir que os experimentos foram satisfatórios, porém tivemos bastante trabalho para chegar ao resultado final, acreditamos que isso tenha ocorrido por sermos iniciantes nessa área e que a experiência nos ajudaria muito nas etapas do processo e essas foram as maiores dificuldades enfrentadas também.
     
-    O assunto que precisamos aprender sozinhos foi como demonstrar graficamente se os dados que estamos utilizando são linearmente separáveis ou não para entendermos qual tipo de perceptron atenderia nosso experimento. Nosso conjunto de dados tem dimensionalidade 9 e nos deparamos com a dificuldade da plotagem utilizando os mesmos recursos que vinhamos desenvolvendo nos nossos trabalhos semanais, para isso, precisamos aprender a utilizar o PCA(Principal Component Analysis). Ao buscar informações sobre o assunto, deparamos com a quantidade infinita de materiais na área de inteligência artificial que podem nos auxiliar no desenvolvimento e entendimento de assuntos diversos nesse ramo.
+    O assunto que precisamos aprender sozinhos foi como demonstrar graficamente se os dados que estamos utilizando são linearmente separáveis ou não para entendermos qual tipo de perceptron atenderia nosso experimento. Nosso conjunto de dados tem dimensionalidade 9 e nos deparamos com a dificuldade da plotagem utilizando os mesmos recursos que vínhamos desenvolvendo nos nossos trabalhos semanais, para isso, precisamos aprender a utilizar o PCA(Principal Component Analysis). Ao buscar informações sobre o assunto, deparamos com a quantidade infinita de materiais na área de inteligência artificial que podem nos auxiliar no desenvolvimento e entendimento de assuntos diversos nesse ramo.
     
     Referente à nossa opinião de potencialidade para publicar o trabalho, acreditamos que para que um trabalho seja publicável ele tem que trazer informações novas e resultados bastante relevantes, tais como: um conjunto de dados que foi criado pelos autores ou uma melhoria num algoritmo existente, criação de um algoritmo que melhore, sistematicamente, a aprendizagem cognitiva ou que seja novo no mercado e baseado nessas considerações, entendemos que o nosso trabalho não apresenta requisitos para publicação, pois foi baseado em soluções anteriores existentes.
 
@@ -261,10 +263,10 @@ O banco de dados utilizado nesse experimento foi obtido da Universidade de Wisco
 \bibitem{b9} Rosenblatt, “The Perceptron: A Theory of Statistical Separability in Cognitive Systems”, Cornell Aeronautical Laboratory, Report No. VG1196-G-1, January, 1958. 
 \bibitem{b10} O. L. Mangasarian and W. H. Wolberg: "Cancer          diagnosis via linear 
       programming", SIAM News, Volume 23, Number 5, September 1990, pp 1 & 18.
-\bibitem{b11} William H. Wolberg and O.L. Mangasarian: "Multisurface method of 
-      pattern separation for medical diagnosis applied to breast cytology", 
-      Proceedings of the National Academy of Sciences, U.S.A., Volume 87, 
-      December 1990, pp 9193-9196.
+\bibitem{b11} William H. Wolberg and O.L. Mangasarian: "Multisurface method of pattern separation for medical diagnosis applied to breast cytology", Proceedings of the National Academy of Sciences, U.S.A., Volume 87, December 1990, pp 9193-9196.
+
+\bibitem{b12} Duda, R.O., Hart, P.E.: “Pattern Classification and Scene Analysis”, In: Wiley-Interscience Publication, New York (1973)
+
+\bibitem{b13} Bishop, C.M.: “Neural Networks for Pattern Recognition”. Oxford University Press,New York (1999).
 \end{thebibliography}
 \end{document}
-
